@@ -1,0 +1,12 @@
+[Unit]
+Description=api service for youtora
+After=network.target
+
+[Service]
+User=eubin
+Environment=FLASK_APP=/home/eubin/word-chemist/back/views.py
+ExecStart=/home/eubin/word-chemist/wordchemenv/bin/flask run --host=0.0.0.0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
