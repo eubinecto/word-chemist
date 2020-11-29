@@ -1,5 +1,6 @@
-from back.config import MOST_FREQ_WORDS_TXT, NLP_MODEL, CHOICES_TXT_PATH
+from back.config import MOST_FREQ_WORDS_TXT, CHOICES_TXT_PATH
 from back.utils import STOP_WORDS
+
 
 def main():
     # filter out stopwords!

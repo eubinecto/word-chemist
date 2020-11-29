@@ -69,11 +69,13 @@ def load_fasttext_model() -> Word2VecKeyedVectors:
     return model
 
 
-def load_choices() -> list:
+def load_choices(fasttext_model: Word2VecKeyedVectors) -> list:
     choices = list()
     with open(CHOICES_TXT_PATH, 'r') as fh:
         for line in fh:
-            choices.append(line.strip())
+            word = line.strip()
+            if word in fasttext_model.vocab:
+                choices.append(word)
     return choices
 
 
