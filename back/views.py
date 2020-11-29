@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 
 from back.errors import InvalidRequestError
 from back.utils import load_fasttext_model, load_choices, add, sub, similar_by_vec, similar_by_word, cos_dist
