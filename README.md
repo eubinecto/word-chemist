@@ -2,7 +2,7 @@
 
 ## To start the front end:
 ```
-cd front/word-chemist
+cd fronword-chemist
 ```
 ```
 npm install
