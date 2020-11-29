@@ -1,4 +1,13 @@
 # word-chemist
+> Word-chemist: The game of chemical reactions, except the chemicals are made of words. 
+
+demo video |
+ --- | 
+[![](http://img.youtube.com/vi/gumyUyn4nZM/0.jpg)](http://www.youtube.com/watch?v=gumyUyn4nZM "Word-chemist: The game of chemical reactions, except the chemicals are made of words.") |
+
+
+More details on the project can be found on our [DevPost submission](https://devpost.com/software/word-chemist?ref_content=user-portfolio&ref_feature=in_progress).
+
 ## front
 ### To start the front end:
 ```
