@@ -114,7 +114,10 @@ export default class App extends Component {
   
   beginGame = event =>{
     this.setState({gameState: 1});
+    this.setState({moves: 2});
+    this.setState({result: 0});
     this.getSrcDest();
+    this.updateScore();
   }
   calculateScore(){
     const res = axios.get(`http://125.181.29.86:5000/word_chemist/cos_dist`,{ 
@@ -134,6 +137,23 @@ export default class App extends Component {
       console.log(error);
   });
   }
+
+  updateScore(){
+    const res = axios.get(`http://125.181.29.86:5000/word_chemist/cos_dist`,{ 
+        params: {
+        first: this.state.current,
+        second: this.state.target,
+      }
+    }).then((response) => {
+      const data = response.data;
+      console.log(data);
+      var score = data;
+      this.setState({result:score});
+    }, (error) => {
+      console.log(error);
+  });
+  }
+
   winGame (){
     console.log("winning game");
     this.setState({gameState: 2});
@@ -145,10 +165,13 @@ export default class App extends Component {
   handleCurrent (event){
     var label = this.state.selLabel;
     this.setState({current: label});
-    this.setState({moves: this.state.moves-1});
-    if (this.state.moves===1){
-      this.calculateScore();
-    }
+    this.updateScore();
+    this.setState({moves: this.state.moves-1}, () => {
+      if (this.state.moves===0){
+        this.calculateScore();
+      }
+    });
+    
   }
 
   render() {
@@ -156,7 +179,7 @@ export default class App extends Component {
       return (
         <div id = "Option">
           <h3>Moves remaining: {this.state.moves}</h3>
-          <h1>Your current is: {this.state.current} Your target is: {this.state.target}</h1>
+          <h1>Your current is: {this.state.current} Your target is: {this.state.target} Your current score: {this.state.result}</h1>
           <Select options={this.state.selectOptions} onChange={this.handleChange.bind(this)} />
             <p>You have selected <strong>{this.state.name}</strong> whose id is <strong>{this.state.id}</strong></p>
           <form onSubmit={this.handleSubmit}>
@@ -194,7 +217,7 @@ export default class App extends Component {
       console.log("Score: " + this.state.result);
       return (
         <div>
-          {/* <Fireworks {...fxProps} /> */}
+          <Fireworks {...fxProps} />
       <h1>Congrats! Your score is {this.state.result}</h1>
           <form onSubmit={this.beginGame}>
             <button id="begin" type="submit">Play again</button>
