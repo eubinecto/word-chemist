@@ -75,9 +75,5 @@ def api_cos_dist():
     global FASTTEXT_MODEL
     first = request.args.get("first")
     second = request.args.get("second")
-
-    if first not in CHOICES or second not in CHOICES:
-        raise InvalidRequestError("first and second must be one of the choices")
-
     dist = cos_dist(FASTTEXT_MODEL, first, second)
     return jsonify(dist)
