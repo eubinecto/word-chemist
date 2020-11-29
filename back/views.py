@@ -1,11 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from back.errors import InvalidRequestError
 from back.utils import load_fasttext_model, all_options, add, sub, similar_by_vec
 
 app = Flask(__name__)
 # this should be setup
 FASTTEXT_MODEL = load_fasttext_model()
-VALID_OPS = ("+", "-")
+VALID_OPS = ("add", "sub")
 
 
 # handler for invalid request
@@ -27,12 +27,16 @@ def api_all_options():
     return jsonify(all_options(FASTTEXT_MODEL))
 
 
-@app.route("/word_chemist/add_or_sub/<op><first><second><int:top_n>")
-def api_add_or_sub(op: str, first: str, second: str, top_n: int):
+@app.route("/word_chemist/add_or_sub")
+def api_add_or_sub():
+    op = request.args.get("op")
+    first = request.args.get("first")
+    second = request.args.get("second")
+    top_n = request.args.get("top_n", int)
     global FASTTEXT_MODEL
     if op not in VALID_OPS:
         raise InvalidRequestError
-    elif op == "+":
+    elif op == "add":
         res = add(FASTTEXT_MODEL, first, second)
     else:
         res = sub(FASTTEXT_MODEL, first, second)
