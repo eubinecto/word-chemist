@@ -1,14 +1,15 @@
 from flask import Flask, jsonify, request
-from flask_cors import cross_origin
+from flask_cors import CORS
 
 from back.errors import InvalidRequestError
 from back.utils import load_fasttext_model, load_choices, add, sub, similar_by_vec, similar_by_word, cos_dist
 import random
 
 app = Flask(__name__)
+cors = CORS(app)
 # this should be setup
 FASTTEXT_MODEL = load_fasttext_model()
-CHOICES = load_choices()
+CHOICES = load_choices(FASTTEXT_MODEL)
 
 VALID_OPS = ("add", "sub")
 
@@ -28,7 +29,6 @@ def handle_invalid_request(error):
 
 
 @app.route('/word_chemist/all_choices')
-@cross_origin()
 def api_all_choices():
     global CHOICES
     """
@@ -38,7 +38,6 @@ def api_all_choices():
 
 
 @app.route("/word_chemist/add_or_sub")
-@cross_origin()
 def api_add_or_sub():
     global FASTTEXT_MODEL
     op = request.args.get("op")
@@ -56,7 +55,6 @@ def api_add_or_sub():
 
 
 @app.route("/word_chemist/similar_by_word")
-@cross_origin()
 def api_similar_by_word():
     global FASTTEXT_MODEL
     word = request.args.get("word")
@@ -66,7 +64,6 @@ def api_similar_by_word():
 
 
 @app.route("/word_chemist/src_dest")
-@cross_origin()
 def api_src_dest():
     global SRC_DEST
     pair = random.choice(SRC_DEST)
@@ -74,7 +71,6 @@ def api_src_dest():
 
 
 @app.route("/word_chemist/cos_dist")
-@cross_origin()
 def api_cos_dist():
     global FASTTEXT_MODEL
     first = request.args.get("first")
