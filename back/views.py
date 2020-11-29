@@ -32,7 +32,7 @@ def api_add_or_sub():
     op = request.args.get("op")
     first = request.args.get("first")
     second = request.args.get("second")
-    top_n = request.args.get("top_n", int)
+    top_n = request.args.get("top_n", type=int)
     global FASTTEXT_MODEL
     if op not in VALID_OPS:
         raise InvalidRequestError

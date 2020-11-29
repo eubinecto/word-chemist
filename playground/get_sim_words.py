@@ -10,7 +10,7 @@ def main():
     fasttext_model.vectors_norm = fasttext_model.vectors  # prevent recalc of normed vectors
     print("loading similar words..")
     start = time.time()
-    sims = fasttext_model.similar_by_word(word="eagle")
+    sims = fasttext_model.similar_by_word(word="eagle", topn=5)
     print(sims)
     end = time.time()
     print("elapsed:",  str(end - start))
