@@ -49,4 +49,5 @@ def api_similar_by_word():
     global FASTTEXT_MODEL
     word = request.args.get("word")
     top_n = request.args.get("top_n", type=int)
-    return similar_by_word(FASTTEXT_MODEL, word, top_n)
+    sims = similar_by_word(FASTTEXT_MODEL, word, top_n)
+    return jsonify(sims)
