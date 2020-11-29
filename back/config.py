@@ -10,4 +10,4 @@ FASTTEXT_NEW_KEYED_VEC_PATH = path.join(DATA_DIR, "crawl-300d-2M-new.vec")
 FASTTEXT_NEW_VEC_NORM_PKL_PATH = path.join(DATA_DIR, "crawl-300d-2M-new.vec-norm.pkl")
 MOST_FREQ_WORDS_TXT = path.join(DATA_DIR, "most_freq_words.txt")
 NLP_MODEL = "en_core_web_sm"
-CHOICES_TXT_PATH = path.join(DATA_DIR, "choices.txt")
+CHOICES_TXT_PATH = path.join(BACK_DIR, "choices.txt")
