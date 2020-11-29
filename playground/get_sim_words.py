@@ -8,10 +8,11 @@ import json
 
 def main():
     fasttext_model = load_fasttext_model()
-    # https://stackoverflow.com/a/43067907
-    sims = similar_by_word(fasttext_model, "zebra", 10)
-
-    print(json.dumps(sims))
+    student_vec = fasttext_model.get_vector("student")
+    company_vec = fasttext_model.get_vector("company")
+    sims = similar_by_word(fasttext_model, student_vec + company_vec, top_n=20)
+    for sim in sims:
+        print(sim)
 
 
 if __name__ == '__main__':
