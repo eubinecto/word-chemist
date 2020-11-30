@@ -15,7 +15,6 @@ VALID_OPS = ("add", "sub")
 
 # must exist in back/data/choices.txt
 SRC_DEST = (
-    ("student", "company"),
     ("possible", "screwed")
 )
 
